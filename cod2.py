@@ -38,14 +38,25 @@ class Lane:
 		self.db_connection=db_connection.connection
 		self.lan=lan
 
+	def sel(self):
+		c=self.db_connection.cursor()
+		c.execute('SELECT * FROM table1 WHERE id=(%s);',[(int(self.param))])
+		entries=c.fetchone()
+		self.text=entries[1]
+		c.close()
+
 	def save(self):
 		c=self.db_connection.cursor()
 		c.execute('INSERT INTO table1(lane) VALUES (%s);',[(self.lan)])
+		self.param=c.lastrowid
+
 		self.db_connection.commit()
 		c.close()
 
 con=Connection('root','17021942','lab')
 
 with con:
-	lane=Lane(con,'Toxas')
+	lane=Lane(con,'Tdsffkdslnfdsl')
 	lane.save()
+	lane.sel()
+	print("id: {}, stroka: {}".format(lane.param, lane.text))

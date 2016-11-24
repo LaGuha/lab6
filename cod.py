@@ -11,7 +11,7 @@ cur=db.cursor()
 
 cur.execute('INSERT INTO table1 VALUES (id,"stroka")')
 
-cur.commit()
+db.commit()
 
 cur.execute('SELECT * FROM table1;')
 
